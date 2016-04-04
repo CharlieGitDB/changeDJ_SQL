@@ -1,5 +1,5 @@
 {
-  "name": "yourprojectnamehere",
+  "name": "changedjsql",
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
@@ -7,7 +7,7 @@
     "test": "echo 'error no test found' exit 1",
     "start": "nodemon server/server.js"
   },
-  "author": "",
+  "author": "Charlie A",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.3.0",
