@@ -1,0 +1,128 @@
+@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+.redBtn {
+  background: #f85032;
+  background: -moz-linear-gradient(top, #f85032 0%, #ff1500 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, #f85032), color-stop(100%, #ff1500));
+  background: -webkit-linear-gradient(top, #f85032 0%, #ff1500 100%);
+  background: -o-linear-gradient(top, #f85032 0%, #ff1500 100%);
+  background: -ms-linear-gradient(top, #f85032 0%, #ff1500 100%);
+  background: linear-gradient(to bottom, #f85032 0%, #ff1500 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f85032', endColorstr='#ff1500', GradientType=0 ); }
+
+.redBtn:active {
+  background: #f85032; }
+
+body {
+  font-family: 'Source Sans Pro', sans-serif; }
+
+button {
+  background: #55c247;
+  background: -moz-linear-gradient(top, #55c247 0%, #3b9928 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, #55c247), color-stop(100%, #3b9928));
+  background: -webkit-linear-gradient(top, #55c247 0%, #3b9928 100%);
+  background: -o-linear-gradient(top, #55c247 0%, #3b9928 100%);
+  background: -ms-linear-gradient(top, #55c247 0%, #3b9928 100%);
+  background: linear-gradient(to bottom, #55c247 0%, #3b9928 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#55c247', endColorstr='#3b9928', GradientType=0 );
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: box-shadow 0.2s, border 0.2s; }
+
+button:hover {
+  box-shadow: 0 0 5px 1px #969696; }
+
+button:active {
+  background: #55c247; }
+
+input {
+  padding: 10px;
+  margin: 2px;
+  border: solid 1px #dcdcdc;
+  border-radius: 3px;
+  transition: box-shadow 0.3s, border 0.3s; }
+
+input:focus {
+  border: solid 1px #707070;
+  box-shadow: 0 0 5px 1px #969696; }
+
+.loaderBody {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  margin: 0 auto;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  background: white; }
+
+.spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100; }
+
+.logoLoginRegisterContainer {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%); }
+
+.loginRegisterBox {
+  border-radius: 5px;
+  background: #34509D;
+  padding: 10px;
+  -moz-box-shadow: 0 0 20px #000;
+  -webkit-box-shadow: 0 0 20px #000;
+  box-shadow: 0 0 20px #000;
+  color: white;
+  margin: auto;
+  text-align: center;
+  min-width: 378px; }
+
+.logoContainer {
+  padding: 17px;
+  margin: auto;
+  text-align: center;
+  display: none; }
+
+.loginLogo {
+  max-height: 75px; }
+
+.logoText {
+  font-family: "Ubuntu Mono", sans-serif;
+  letter-spacing: 4px;
+  padding: 17px;
+  font-size: 24px;
+  line-height: 0.8; }
+
+.loginError {
+  display: none;
+  text-align: center; }
+
+.loginContainer {
+  display: none; }
+
+.hasAcctBox {
+  display: none; }
+
+.noAcctBox {
+  display: none; }
+
+.registerContainer {
+  display: none; }
+
+.registerError {
+  display: none;
+  text-align: center; }
+
+/*# sourceMappingURL=style.css.map */

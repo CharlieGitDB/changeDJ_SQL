@@ -1,0 +1,65 @@
+.loaderBody {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  margin: 0 auto;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  background: white;
+}
+.spinner {
+  @include middleOfScreen(50%);
+  z-index: 100;
+}
+.logoLoginRegisterContainer {
+  @include middleOfScreen(45%);
+}
+.loginRegisterBox {
+  border-radius: 5px;
+  background: $mainBlue;
+  padding: 10px;
+  -moz-box-shadow: 0 0 20px #000;
+  -webkit-box-shadow: 0 0 20px #000;
+  box-shadow: 0 0 20px #000;
+  color: white;
+  margin: auto;
+  text-align: center;
+  min-width: 378px;
+}
+.logoContainer {
+  padding: 17px;
+  margin: auto;
+  text-align: center;
+  display: none;
+}
+.loginLogo {
+  max-height: 75px;
+}
+.logoText {
+  font-family: $logoFont;
+  letter-spacing: 4px;
+  padding: 17px;
+  font-size: 24px;
+  line-height: 0.8;
+}
+.loginError {
+  display: none;
+  text-align: center;
+}
+.loginContainer {
+  display: none;
+}
+.hasAcctBox {
+  display: none;
+}
+.noAcctBox {
+  display: none;
+}
+.registerContainer{
+  display: none;
+}
+.registerError {
+  display: none;
+  text-align: center;
+}
