@@ -1,7 +1,7 @@
 //[x]||||||||||||||||||||||||||||||||||||||||||[x]//
 //[1]GLOBAL VARS                               [1]//
 //[x]||||||||||||||||||||||||||||||||||||||||||[x]//
-localStorage.hasUserBeenHere;
+
 
 //[x]||||||||||||||||||||||||||||||||||||||||||[x]//
 //[1]DOCUMENT READY                            [1]//
@@ -52,12 +52,13 @@ function registerRun(){
   function writeError(err){
     $('.registerError').text(err);
     $('.registerError').show();
+    $('.registerError').delay(5000).fadeOut();
   }
 
   $('#registerForm').submit(function(e){
     e.preventDefault();
     if($('.registerPass').val() != $('.registerPass2').val()){
-        writeError('Passwords must match');
+        writeError('Passwords must match.');
     }
     if($('.registerUser').val().length < 3){
       writeError('Username must be at least 3 characters long.');
@@ -74,7 +75,7 @@ function registerRun(){
         data: user
       }).done(function(response){
         $('body').html(response);
-        localStorage.hasUserBeenBeenHere = true;
+        localStorage.setItem('hasUserBeenHere', true);
       });
     };
   });
@@ -106,11 +107,15 @@ function isUserAuthenticated(){
 function setLoginRegisterView(){
   $('.loaderBody, .spinner').hide();
   $('.logoContainer').show();
-  if(localStorage.hasUserBeenHere == undefined){
-    $('.registerContainer, .hasAcctBox').show();
+  if(localStorage.getItem('hasUserBeenHere') == undefined){
+    $('.suggestSwapSpan').text('If you already have an account you may login.');
+    $('.suggestSwapBtn').text('Login');
+    $('.registerContainer, .suggestSwapBox').show();
     $('.registerUser').focus();
   }else{
-    $('.loginContainer, .noAcctBox').show();
+    $('.suggestSwapSpan').text('If you don\'t have an account one you may register.');
+    $('.suggestSwapBtn').text('Register');
+    $('.loginContainer, .suggestSwapBox').show();
     $('.loginUser').focus();
   }
 }
@@ -122,11 +127,13 @@ function swapRegisterLogic(){
   $('body').on('click', '.suggestSwapBtn', function(){
     $(':input').val('');
     if($(this).text() == 'Register'){
-      $('.noAcctBox, .loginContainer').fadeOut();
-      $('.hasAcctBox, .registerContainer').delay(400).fadeIn();
-    }else{
-      $('.hasAcctBox, .registerContainer').fadeOut();
-      $('.noAcctBox, .loginContainer').delay(400).fadeIn();
+      $('.loginContainer').hide('clip',{complete:function(){$('.registerContainer').show('clip');}});
+      $(this).text('Login');
+      $('.suggestSwapSpan').text('If you already have an account you may login.');
+    }else if($(this).text() == 'Login'){
+      $('.registerContainer').hide('clip',{complete:function(){$('.loginContainer').show('clip');}});
+      $(this).text('Register');
+      $('.suggestSwapSpan').text('If you don\'t have an account one you may register.');
     }
   });
 }

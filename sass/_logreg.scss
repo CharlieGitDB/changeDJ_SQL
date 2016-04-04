@@ -38,9 +38,8 @@
 }
 .logoText {
   font-family: $logoFont;
-  letter-spacing: 4px;
   padding: 17px;
-  font-size: 24px;
+  font-size: 35px;
   line-height: 0.8;
 }
 .loginError {
@@ -49,6 +48,9 @@
 }
 .loginContainer {
   display: none;
+}
+.login {
+  width: 186px;
 }
 .hasAcctBox {
   display: none;
@@ -62,4 +64,7 @@
 .registerError {
   display: none;
   text-align: center;
+}
+.register {
+  width: 186px;
 }

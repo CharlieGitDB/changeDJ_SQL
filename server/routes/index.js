@@ -54,7 +54,7 @@ router.post('/register', function(req, res, next) {
             next(err);
           } else {
             //change this to send to main page
-          res.redirect('/sucess');
+          res.redirect('/success');
           }
         });
   });

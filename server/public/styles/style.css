@@ -100,9 +100,8 @@ input:focus {
 
 .logoText {
   font-family: "Ubuntu Mono", sans-serif;
-  letter-spacing: 4px;
   padding: 17px;
-  font-size: 24px;
+  font-size: 35px;
   line-height: 0.8; }
 
 .loginError {
@@ -111,6 +110,9 @@ input:focus {
 
 .loginContainer {
   display: none; }
+
+.login {
+  width: 186px; }
 
 .hasAcctBox {
   display: none; }
@@ -124,5 +126,8 @@ input:focus {
 .registerError {
   display: none;
   text-align: center; }
+
+.register {
+  width: 186px; }
 
 /*# sourceMappingURL=style.css.map */
