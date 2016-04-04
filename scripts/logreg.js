@@ -26,7 +26,7 @@ function start(){
 //[x]||||||||||||||||||||||||||||||||||||||||||[x]//
 
 //[x]||||||||||||||||||||||||||||||||[x]//
-//[2]LOGIN REGISTER FUNCTION         [2]//
+//[2]LOGIN/REGISTER FUNCTION         [2]//
 //[x]||||||||||||||||||||||||||||||||[x]//
 function loginRun(){
   $('#loginForm').submit(function(e){
