@@ -32,6 +32,7 @@ function mainPageLogic(){
     $.ajax({
       method: 'POST',
       url: '/removedj',
+      async: false,
       data: user
     }).done(function(response){
       console.log(response);
@@ -85,6 +86,8 @@ function mainPageLogic(){
     if(e.which == 13){
       if ($(this).val().match(/^\s*$/)) {
           alert('Message cannot be blank');
+      }else if($(this).val().length > 200){
+        alert('200 character limit');
       } else {
         var userNameAndMsg = {userId: userInfo.username, msg: $(this).val()};
         socket.emit('user chat message', userNameAndMsg);
@@ -118,7 +121,7 @@ function mainPageLogic(){
       if(response == 'joined'){
         $('.joinDJ').hide();
         $('.leaveDJ').show();
-        socket.emit('dj queue', 'run it');
+        socket.emit('dj queue');
       }
     });
   });
@@ -133,7 +136,7 @@ function mainPageLogic(){
       if(response == 'left'){
         $('.leaveDJ').hide();
         $('.joinDJ').show();
-        socket.emit('dj queue', 'run it');
+        socket.emit('dj queue');
       }
     });
   });
@@ -145,7 +148,9 @@ function mainPageLogic(){
     $('.djQueue ul').empty();
     if(response.length != 0){
       $('.noDJ').hide();
+      $('.djQueue ul').show();
     }else{
+      $('.djQueue ul').hide();
       $('.noDJ').show();
     }
     for(var i = 0; i < response.length; i++){
@@ -158,7 +163,6 @@ function mainPageLogic(){
       method: 'GET',
       url: '/djqueue'
     }).done(function(response){
-      console.log('hit');
       updateQueue(response);
     });
   });

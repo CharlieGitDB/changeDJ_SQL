@@ -50,10 +50,8 @@ io.on('connection', function(socket){
   //[x]||||||||||||||||||||||||||||||||[x]//
   //[2]DJ QUEUE                        [2]//
   //[x]||||||||||||||||||||||||||||||||[x]//
-  socket.on('dj queue', function(run){
-    if(run == 'run it'){
-      socket.emit('dj queue');
-    }
+  socket.on('dj queue', function(){
+      io.emit('dj queue');
   });
 
   // socket.on('play song', function(song){
@@ -105,7 +103,6 @@ io.on('connection', function(socket){
     }
   });
 });
-
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
