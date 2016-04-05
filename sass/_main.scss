@@ -1,0 +1,131 @@
+.header {
+  background: $mainBlue;
+  width: 100%;
+  margin: 0;
+}
+.mainLogo {
+  max-height: 35px;
+  padding: 3px 3px 3px 5px;
+}
+.mainLogoText {
+  color: white;
+  position: absolute;
+  left: 19px;
+  font-size: 24px;
+  top: -3px;
+}
+.headerButton {
+  float: right;
+  background: white;
+  color: black;
+  padding: 5px;
+  margin: 7px;
+  &:active {
+    background: #ccc;
+  }
+}
+.headerBtnText {
+  padding: 5px;
+}
+.logoutImg {
+  max-height: 20px;
+}
+.mainContainer {
+  width: 100%;
+}
+.containerBox {
+  background: $mainBlue;
+  border-radius: 5px;
+  width: 100%;
+  padding: 5px 5px 5px 5px;
+  margin: 5px;
+}
+.leftContainer {
+  float: left;
+  width: 47%;
+}
+.chatBox {
+  height: 30%;
+}
+.chatMessages {
+  background: white;
+  color: black;
+  margin: 5px auto;
+  padding: 2px;
+  width: 99%;
+  overflow-y: scroll;
+  min-height: 75px;
+  ul {
+    margin: 0px;
+    list-style: none;
+    padding-left: 0px;
+    li:nth-child(even){
+      background: #ddd;
+    }
+  }
+}
+.chatInput {
+  width: 99%;
+}
+.mainOptionsBtn {
+  width: 49%;
+  float: left;
+}
+.mainOptionsContent {
+  background: white;
+  color: black;
+  margin: 5px;
+  padding: 7px;
+  text-align: center;
+}
+.addSongContent {
+  display: none;
+}
+.searchInput {
+  width: 100%;
+  text-align: center;
+}
+.rightContainer {
+  float: right;
+  margin: 5px;
+  width: 50%;
+}
+.ytContainer {
+  margin: auto;
+  display: inline-block;
+}
+#player {
+  pointer-events: none;
+}
+.djBtn {
+  margin: auto;
+  width: 100%;
+}
+.leaveDJ {
+  display: none;
+}
+.containerBoxRight {
+  background: $mainBlue;
+  border-radius: 5px;
+  padding: 5px 5px 5px 5px;
+  margin: 5px 0px 0px 0px;
+}
+.djQueue {
+  text-align: center;
+  font-size: 20px;
+  ul {
+    background: white;
+    margin: 0px;
+    list-style: none;
+    padding-left: 0px;
+    overflow-y: scroll;
+    li {
+      display: block;
+      background: $mainBlue;
+      padding: 3px;
+      margin: 5px;
+      font-family: $logoFont;
+      font-size: 22px;
+    }
+  }
+}

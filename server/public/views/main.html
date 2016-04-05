@@ -1,1 +1,39 @@
-<div class="hi">whats up</div>
+<div class="header">
+  <img src="images/logo.png" alt="ChangeDJ" class="mainLogo"><span class="logoText mainLogoText">ChangeDJ</span>
+  <div class="headerButton btn logout"><span class="headerBtnText">Logout</span></div>
+</div>
+
+<div class="mainContainer">
+  <div class="leftContainer">
+
+    <div class="chatBox containerBox">
+      <div class="chatMessages">
+        <ul></ul>
+        </div>
+      <input type="text" placeholder="Type your message here..." class="chatInput"/>
+    </div>
+
+    <div class="mainOptions containerBox">
+      <div class="mainOptionsBtnContainer">
+        <button class="mainOptionsBtn redBtn">Playlist</button><button class="mainOptionsBtn">Add Songs</button>
+      </div><div class="clearfix"></div>
+      <div class="mainOptionsContent playlistContent">You currently have no songs in your playlist.</div>
+      <div class="mainOptionsContent addSongContent">
+        <input type="text" placeholder="Type here to search for a song..." class="searchInput"/>
+        <div class="songSearches"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rightContainer">
+    <div class="ytContainer">
+      <div id="player"></div><br>
+      <button class="joinDJ djBtn">Join DJ List</button>
+      <button class="leaveDJ redBtn djBtn">Leave DJ List</button>
+    </div>
+    <div class="djQueue containerBoxRight">
+      <span class="noDJ">There is currently no one DJing.  Be the first!</span>
+      <ul></ul>
+    </div>
+  </div>
+</div>

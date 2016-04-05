@@ -18,6 +18,7 @@ function start(){
   loginRun();
   registerRun();
   swapRegisterLogic();
+  $.getScript('http://apis.google.com/js/client.js?onload=init');
 }
 
 
@@ -37,12 +38,17 @@ function loginRun(){
       url: '/login',
       data: user
     }).done(function(response){
-      console.log(response);
       if(response == 'fail'){
         $('.loginError').show().delay(5000).fadeOut();
       }else{
         //may need to fix
-        $('body').html(response);
+
+        $('body').html(response).promise().done(function(){
+          if(mainPageCounter == 0){
+            mainPageLogic();
+            mainPageCounter++;
+          }
+        });
       }
     });
   });
@@ -74,8 +80,16 @@ function registerRun(){
         url: '/register',
         data: user
       }).done(function(response){
-        $('body').html(response);
-        localStorage.setItem('hasUserBeenHere', true);
+        if(response == 'registered'){
+          writeError('Username is taken.');
+        }else{
+          $('body').html(response);
+          localStorage.setItem('hasUserBeenHere', true);
+          if(mainPageCounter == 0){
+            mainPageLogic();
+            mainPageCounter++;
+          }
+        }
       });
     };
   });
@@ -89,14 +103,14 @@ function isUserAuthenticated(){
     method: 'GET',
     url: '/isuserloggedin'
   }).done(function(response){
-    if(response == 'yes'){
-      // if(mainPageCounter == 0){
-      //   mainPageLogic();
-      //   mainPageCounter++;
-      // }
-      console.log('logged in');
-    }else{
+    if(response == 'no'){
       setLoginRegisterView();
+    }else{
+      $('body').html(response);
+      if(mainPageCounter == 0){
+          mainPageLogic();
+          mainPageCounter++;
+      }
     }
   });
 };
@@ -137,3 +151,12 @@ function swapRegisterLogic(){
     }
   });
 }
+
+//[x]||||||||||||||||||||||||||||||||[x]//
+//[2]INVOKE YOUTUBE API KEY          [2]//
+//[x]||||||||||||||||||||||||||||||||[x]//
+function init() {
+  gapi.client.setApiKey('AIzaSyBRtVVHPmgkcUe36EUdHN-yWetm7-IjIO0');
+  gapi.client.load('youtube', 'v3', function(){
+  });
+};

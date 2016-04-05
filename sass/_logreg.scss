@@ -38,6 +38,7 @@
 }
 .logoText {
   font-family: $logoFont;
+  color: black;
   padding: 17px;
   font-size: 35px;
   line-height: 0.8;
@@ -52,12 +53,6 @@
 .login {
   width: 186px;
 }
-.hasAcctBox {
-  display: none;
-}
-.noAcctBox {
-  display: none;
-}
 .registerContainer{
   display: none;
 }
@@ -67,4 +62,7 @@
 }
 .register {
   width: 186px;
+}
+.suggestSwapBox {
+  display: none;
 }

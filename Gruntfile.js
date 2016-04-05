@@ -1,5 +1,5 @@
 module.exports = function(grunt) {
-    var jsFiles = ['scripts/logreg.js'];
+    var jsFiles = ['scripts/logreg.js', 'scripts/main.js', 'scripts/youtube.js', 'scripts/view.js'];
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         uglify: {

@@ -1,5 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono);
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both; }
+
 .redBtn {
   background: #f85032;
   background: -moz-linear-gradient(top, #f85032 0%, #ff1500 100%);
@@ -9,12 +14,14 @@
   background: -ms-linear-gradient(top, #f85032 0%, #ff1500 100%);
   background: linear-gradient(to bottom, #f85032 0%, #ff1500 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f85032', endColorstr='#ff1500', GradientType=0 ); }
-
-.redBtn:active {
-  background: #f85032; }
+  .redBtn:active {
+    background: #f85032; }
 
 body {
-  font-family: 'Source Sans Pro', sans-serif; }
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: white; }
 
 button {
   background: #55c247;
@@ -36,23 +43,48 @@ button {
   margin: 4px 2px;
   cursor: pointer;
   transition: box-shadow 0.2s, border 0.2s; }
-
-button:hover {
-  box-shadow: 0 0 5px 1px #969696; }
-
-button:active {
-  background: #55c247; }
+  button:hover {
+    box-shadow: 0 0 5px 1px #969696; }
+  button:active {
+    background: #55c247; }
 
 input {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
   padding: 10px;
   margin: 2px;
   border: solid 1px #dcdcdc;
   border-radius: 3px;
   transition: box-shadow 0.3s, border 0.3s; }
+  input:focus {
+    border: solid 1px #707070;
+    box-shadow: 0 0 5px 1px #969696; }
 
-input:focus {
-  border: solid 1px #707070;
-  box-shadow: 0 0 5px 1px #969696; }
+.btn {
+  background: #55c247;
+  background: -moz-linear-gradient(top, #55c247 0%, #3b9928 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, #55c247), color-stop(100%, #3b9928));
+  background: -webkit-linear-gradient(top, #55c247 0%, #3b9928 100%);
+  background: -o-linear-gradient(top, #55c247 0%, #3b9928 100%);
+  background: -ms-linear-gradient(top, #55c247 0%, #3b9928 100%);
+  background: linear-gradient(to bottom, #55c247 0%, #3b9928 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#55c247', endColorstr='#3b9928', GradientType=0 );
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: box-shadow 0.2s, border 0.2s; }
+  .btn:hover {
+    box-shadow: 0 0 5px 1px #969696; }
+  .btn:active {
+    background: #55c247; }
 
 .loaderBody {
   position: absolute;
@@ -100,6 +132,7 @@ input:focus {
 
 .logoText {
   font-family: "Ubuntu Mono", sans-serif;
+  color: black;
   padding: 17px;
   font-size: 35px;
   line-height: 0.8; }
@@ -114,12 +147,6 @@ input:focus {
 .login {
   width: 186px; }
 
-.hasAcctBox {
-  display: none; }
-
-.noAcctBox {
-  display: none; }
-
 .registerContainer {
   display: none; }
 
@@ -129,5 +156,134 @@ input:focus {
 
 .register {
   width: 186px; }
+
+.suggestSwapBox {
+  display: none; }
+
+.header {
+  background: #34509D;
+  width: 100%;
+  margin: 0; }
+
+.mainLogo {
+  max-height: 35px;
+  padding: 3px 3px 3px 5px; }
+
+.mainLogoText {
+  color: white;
+  position: absolute;
+  left: 19px;
+  font-size: 24px;
+  top: -3px; }
+
+.headerButton {
+  float: right;
+  background: white;
+  color: black;
+  padding: 5px;
+  margin: 7px; }
+  .headerButton:active {
+    background: #ccc; }
+
+.headerBtnText {
+  padding: 5px; }
+
+.logoutImg {
+  max-height: 20px; }
+
+.mainContainer {
+  width: 100%; }
+
+.containerBox {
+  background: #34509D;
+  border-radius: 5px;
+  width: 100%;
+  padding: 5px 5px 5px 5px;
+  margin: 5px; }
+
+.leftContainer {
+  float: left;
+  width: 47%; }
+
+.chatBox {
+  height: 30%; }
+
+.chatMessages {
+  background: white;
+  color: black;
+  margin: 5px auto;
+  padding: 2px;
+  width: 99%;
+  overflow-y: scroll;
+  min-height: 75px; }
+  .chatMessages ul {
+    margin: 0px;
+    list-style: none;
+    padding-left: 0px; }
+    .chatMessages ul li:nth-child(even) {
+      background: #ddd; }
+
+.chatInput {
+  width: 99%; }
+
+.mainOptionsBtn {
+  width: 49%;
+  float: left; }
+
+.mainOptionsContent {
+  background: white;
+  color: black;
+  margin: 5px;
+  padding: 7px;
+  text-align: center; }
+
+.addSongContent {
+  display: none; }
+
+.searchInput {
+  width: 100%;
+  text-align: center; }
+
+.rightContainer {
+  float: right;
+  margin: 5px;
+  width: 50%; }
+
+.ytContainer {
+  margin: auto;
+  display: inline-block; }
+
+#player {
+  pointer-events: none; }
+
+.djBtn {
+  margin: auto;
+  width: 100%; }
+
+.leaveDJ {
+  display: none; }
+
+.containerBoxRight {
+  background: #34509D;
+  border-radius: 5px;
+  padding: 5px 5px 5px 5px;
+  margin: 5px 0px 0px 0px; }
+
+.djQueue {
+  text-align: center;
+  font-size: 20px; }
+  .djQueue ul {
+    background: white;
+    margin: 0px;
+    list-style: none;
+    padding-left: 0px;
+    overflow-y: scroll; }
+    .djQueue ul li {
+      display: block;
+      background: #34509D;
+      padding: 3px;
+      margin: 5px;
+      font-family: "Ubuntu Mono", sans-serif;
+      font-size: 22px; }
 
 /*# sourceMappingURL=style.css.map */
