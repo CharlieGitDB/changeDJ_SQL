@@ -31,18 +31,11 @@ function onPlayerReady(event){
 function onPlayerStateChange(event){
   if(event.data === 0){
     console.log('video done');
-    //when song ends, then what?
-    //if error send to socket, if socket sees that you are in dj list you will be removed otherwise your vote is added to the song being over, when the votes correlate with the number of people in the dj list the dj and video changes
-
-    //when user joins ask for video time if a song is playing send back the time person starts playing
-
     socket.emit('song finished', userInfo.username);
-    isVideoPlaying = 0;
   }
 
   if(event.data === 1){
     console.log('playing');
-    isVideoPlaying = 1;
   }
 }
 

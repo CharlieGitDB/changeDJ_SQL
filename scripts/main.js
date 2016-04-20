@@ -5,7 +5,6 @@ var mainPageCounter = 0;
 var socket;
 var userInfo;
 var userPlaylist;
-var isVideoPlaying = 0;
 
 //[x]||||||||||||||||||||||||||||||||||||||||||[x]//
 //[1]MAIN PAGE LOGIC                           [1]//
