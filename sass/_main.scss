@@ -4,16 +4,29 @@
   margin: 0;
   text-align: center;
 }
+.hamburgerIcon {
+  max-height: 28px;
+  float: left;
+  padding: 3px 3px 3px 5px;
+  position: relative;
+  top: 5px;
+  left: 4px;
+  cursor: pointer;
+  -webkit-filter: invert(100%);
+  -moz-filter: invert(100%);
+  -ms-filter: invert(100%);
+  -o-filter: invert(100%);
+  filter: invert(100%);
+}
 .mainLogo {
   max-height: 35px;
   padding: 3px 3px 3px 5px;
   position: relative;
-  left: 34px;
+  left: 17px;
 }
 .mainLogoText {
   color: white;
   position: relative;
-  right: -17px;
   font-size: 24px;
   top: -10px;
 }

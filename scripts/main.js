@@ -87,18 +87,29 @@ function mainPageLogic(){
     });
   });
 
+  $('body').on('click', '.hamburgerIcon', function(){
+    alert('This currently doesn\'t do anything');
+  });
+
   //[x]||||||||||||||||||||||||||||||||[x]//
   //[2]LEFT MENU LOGIC                 [2]//
   //[x]||||||||||||||||||||||||||||||||[x]//
-  $('body').on('click', '.mainOptionsBtn', function(){
-    $('.mainOptionsBtn').toggleClass('redBtn');
-    if($(this).text() == 'Add Songs'){
+  $('body').on('click', '.plBtn', function(){
+    if(!$(this).hasClass('redBtn')){
+      $(this).addClass('redBtn');
+      $('.asBtn').removeClass('redBtn');
+      $('.playlistContent').show();
+      $('.addSongContent').hide();
+    }
+  });
+
+  $('body').on('click', '.asBtn', function(){
+    if(!$(this).hasClass('redBtn')){
+      $(this).addClass('redBtn');
+      $('.plBtn').removeClass('redBtn');
       $('.playlistContent').hide();
       $('.addSongContent').show();
       $('.searchInput').focus();
-    }else{
-      $('.playlistContent').show();
-      $('.addSongContent').hide();
     }
   });
 

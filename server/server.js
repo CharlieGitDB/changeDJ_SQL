@@ -58,17 +58,35 @@ io.on('connection', function(socket){
       io.emit('dj queue');
   });
 
+  //[x]||||||||||||||||||||||||||||||||[x]//
+  //[2]PLAY SONG                       [2]//
+  //[x]||||||||||||||||||||||||||||||||[x]//
+  /*
+    May need to update all SQL now() functions.  Currently isn't showing date but may not be a problem.
+  */
   function sendSong(username){
     var result = [];
     pg.connect(connection, function(err, client, done){
-      // var grabSong = client.query('SELECT songid, id FROM songs WHERE username = $1 AND id=(SELECT MIN(id) FROM songs)', [username]);
-      var grabSong = client.query('SELECT songid, min(id) FROM songs WHERE username = $1 GROUP BY songid  LIMIT 1', [username]);
+      var grabSong = client.query('SELECT songid FROM songs WHERE username = $1 ORDER BY time LIMIT 1', [username]);
       grabSong.on('row', function(row){
         result.push(row);
       });
       grabSong.on('end', function(){
         io.emit('play song', result[0].songid);
-        client.end();
+        var timer = [];
+        var lastSong = client.query('SELECT time FROM songs WHERE username = $1 ORDER BY time LIMIT 1', [username]);
+
+        lastSong.on('row', function(row){
+          timer.push(row);
+        });
+
+        lastSong.on('end', function(){
+          var updateRecentSong = client.query('UPDATE songs SET time = now() WHERE time = $1 AND username = $2', [timer[0].time, username]);
+
+          updateRecentSong.on('end', function(){
+            client.end();
+          });
+        });
       });
     });
   }
