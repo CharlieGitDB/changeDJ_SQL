@@ -12,7 +12,6 @@ passport.deserializeUser(function(id, done) {
   pg.connect(connection, function (err, client) {
 
     var user = {};
-    console.log('called deserializeUser - pg');
       var query = client.query("SELECT * FROM users WHERE id = $1", [id]);
 
       query.on('row', function (row) {

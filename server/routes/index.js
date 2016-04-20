@@ -68,38 +68,6 @@ router.get('/userinfo', function(request, response){
   response.send(request.user);
 });
 
-router.post('/removedj', function(request, response){
-  var username = request.body.username;
-
-  pg.connect(connection, function(err, client, done){
-    var removeDJ = client.query('DELETE FROM djqueue WHERE username = $1', [username], function(err, result){
-      if(err){
-        console.log('error', err);
-      }else{
-        console.log('deleted');
-        response.send('left');
-        client.end();
-      }
-    });
-  });
-});
-
-router.post('/joindj', function(request, response){
-    var username = request.body.username;
-
-    pg.connect(connection, function(err, client, done){
-      var leaveDJ = client.query('INSERT INTO djqueue VALUES ($1)', [username], function(err, result){
-        if(err){
-          console.log('joindj err', err);
-        }else{
-          console.log('joined');
-          response.send('joined');
-          client.end();
-        }
-      });
-    });
-});
-
 router.get('/djqueue', function(request, response){
   var results = [];
 
@@ -117,6 +85,77 @@ router.get('/djqueue', function(request, response){
     if(err){
       console.log('djqueue ', err);
     }
+  });
+});
+
+router.post('/addsongtoplaylist', function(request, response){
+  var username = request.body.username;
+  var songname = request.body.songname;
+  var songid = request.body.songid;
+  var imgurl = request.body.imgurl;
+
+  pg.connect(connection, function(err, client, done){
+    var addSong = client.query('INSERT INTO songs(username, songname, songid, imgurl, time) VALUES ($1, $2, $3, $4, now())', [username, songname, songid, imgurl], function(err, result){
+      if(err){
+        console.log(err);
+        client.end();
+      }else{
+        console.log('song added');
+        var results = [];
+        var sendPlaylist = client.query('SELECT * FROM songs WHERE username = $1', [username]);
+        sendPlaylist.on('row', function(row){
+          results.push(row);
+        });
+        sendPlaylist.on('end', function(){
+          client.end();
+          response.send(results);
+        });
+      }
+    });
+  });
+});
+
+router.post('/getuserplaylist', function(request, response){
+  var username = request.body.username;
+  pg.connect(connection, function(err, client, done){
+    var results = [];
+    var sendPlaylist = client.query('SELECT * FROM songs WHERE username = $1', [username]);
+    sendPlaylist.on('row', function(row){
+      results.push(row);
+    });
+    sendPlaylist.on('end', function(){
+      client.end();
+      response.send(results);
+    });
+    if(err){
+      console.log('error');
+    };
+  });
+});
+
+router.post('/removesong', function(request, response){
+  var username = request.body.username;
+  var songid = request.body.songid;
+  pg.connect(connection, function(err, client, done){
+    var removeSong = client.query('DELETE FROM songs WHERE username = $1 AND songid = $2', [username, songid], function(err, result){
+      if(err){
+        console.log(err)
+      }else{
+        console.log('song removed');
+        var results = [];
+        var sendPlaylist = client.query('SELECT * FROM songs WHERE username = $1', [username]);
+        sendPlaylist.on('row', function(row){
+          results.push(row);
+        });
+        sendPlaylist.on('end', function(){
+          client.end();
+          response.send(results);
+        });
+        if(err){
+          console.log('error');
+        };
+      }
+    });
   });
 });
 

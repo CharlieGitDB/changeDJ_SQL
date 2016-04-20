@@ -2,17 +2,20 @@
   background: $mainBlue;
   width: 100%;
   margin: 0;
+  text-align: center;
 }
 .mainLogo {
   max-height: 35px;
   padding: 3px 3px 3px 5px;
+  position: relative;
+  left: 34px;
 }
 .mainLogoText {
   color: white;
-  position: absolute;
-  left: 19px;
+  position: relative;
+  right: -17px;
   font-size: 24px;
-  top: -3px;
+  top: -10px;
 }
 .headerButton {
   float: right;
@@ -128,4 +131,34 @@
       font-size: 22px;
     }
   }
+}
+.playlistContent {
+  overflow-y: scroll;
+  ul {
+    list-style: none;
+    padding-left: 0px;
+  }
+}
+.playlistIMG {
+  max-height: 60px;
+  margin: 4px 4px -2px 70px;
+}
+.removeSongBtn{
+  float: right;
+  margin: 8px;
+}
+.songSearches {
+  overflow-y: scroll;
+}
+.searchedVideoDiv {
+  background: $mainBlue;
+  margin: 5px 2px 5px 5px;
+  color: white;
+}
+.addSongToPlaylist {
+  float: right;
+  margin: 8px;
+}
+.centerSearchIMG {
+  margin: 4px 4px -2px 70px;
 }
