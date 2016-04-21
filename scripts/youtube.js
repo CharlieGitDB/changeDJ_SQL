@@ -26,6 +26,7 @@ function onPlayerError(event){
 
 function onPlayerReady(event){
   console.log('nada');
+  console.log(player);
 }
 
 function onPlayerStateChange(event){
@@ -36,6 +37,8 @@ function onPlayerStateChange(event){
 
   if(event.data === 1){
     console.log('playing');
+    var vidTitle = player.getVideoData().title;
+    $('.videoTitle').text(vidTitle);
   }
 }
 

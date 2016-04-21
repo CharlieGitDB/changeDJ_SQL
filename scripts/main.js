@@ -52,7 +52,6 @@ function mainPageLogic(){
     url: '/userinfo'
   }).done(function(response){
     userInfo = response;
-    console.log(userInfo);
     var sendMe = {username: userInfo.username};
     $.ajax({
       method: 'POST',
@@ -73,14 +72,16 @@ function mainPageLogic(){
   //[x]||||||||||||||||||||||||||||||||[x]//
   //[2]HEADER MENU LOGIC               [2]//
   //[x]||||||||||||||||||||||||||||||||[x]//
+
+  //this needs to be fixed
   $('body').on('click', '.logout', function(){
-    socket.emit('leave dj', userInfo.username);
-    socket.emit('dj queue');
     $.ajax({
       method: 'GET',
       url: '/logout',
     }).done(function(response){
       if(response == 'logged out'){
+        socket.emit('leave dj', userInfo.username);
+        socket.emit('dj queue');
         location.reload();
       }
     });
@@ -168,6 +169,7 @@ function mainPageLogic(){
     };
   }
 
+  //Will want this fully websockets soon
   socket.on('dj queue', function(){
     $.ajax({
       method: 'GET',
@@ -184,11 +186,11 @@ function mainPageLogic(){
   var imgUrlArray = [];
   function searchVideo(query){
     var q = encodeURIComponent(query).replace(/%20/g, "+");
+    //changed url order=relevance from viewCount, may change back
     $.ajax({
       method: 'GET',
-      url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&order=viewCount&type=video&q='+ q + '&videoSyndicated=true&videoEmbeddable=true&key=AIzaSyBRtVVHPmgkcUe36EUdHN-yWetm7-IjIO0'
+      url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&order=relevance&type=video&q='+ q + '&videoSyndicated=true&videoEmbeddable=true&key=AIzaSyBRtVVHPmgkcUe36EUdHN-yWetm7-IjIO0'
     }).done(function(response){
-      console.log(response);
       for(var i = 0; i < response.items.length; i++){
         songIdArray.push(response.items[i].id.videoId);
         imgUrlArray.push(response.items[i].snippet.thumbnails.default.url);
@@ -236,11 +238,14 @@ function mainPageLogic(){
   //[2]UPDATE PLAYLIST                 [2]//
   //[x]||||||||||||||||||||||||||||||||[x]//
   function updatePlaylist(response){
-    console.log(response);
     $('.playlistContent').empty();
     if(response.length == 0){
       $('.playlistContent').text('You currently have no songs in your playlist.');
+      $('.djBtn').hide();
+      socket.emit('leave dj', userInfo.username);
+      socket.emit('dj queue');
     }else{
+      $('.joinDJ').show();
       userPlaylist = response;
       $('.playlistContent').append('<ul class="playlistContentList"></ul>');
       var songIdData = 0;
@@ -266,5 +271,18 @@ function mainPageLogic(){
     }).done(function(response){
       updatePlaylist(response);
     });
+  });
+
+  //[x]||||||||||||||||||||||||||||||||[x]//
+  //[2]SHOW CURRENT DJ                 [2]//
+  //[x]||||||||||||||||||||||||||||||||[x]//
+
+  //Will need to make this work with updateQueue
+  socket.on('current dj', function(username){
+    console.log(username);
+    $('.djQueue ul li').css('background', '#34509D');
+    $('.djQueue ul li').filter(function(){
+      return $(this).text() === username;
+    }).css('background', '#56C247');
   });
 }
