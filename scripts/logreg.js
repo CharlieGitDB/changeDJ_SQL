@@ -18,8 +18,6 @@ function start(){
   loginRun();
   registerRun();
   swapRegisterLogic();
-  //may not need
-  // $.getScript('http://apis.google.com/js/client.js?onload=init');
 }
 
 
@@ -152,14 +150,3 @@ function swapRegisterLogic(){
     }
   });
 }
-
-//[x]||||||||||||||||||||||||||||||||[x]//
-//[2]INVOKE YOUTUBE API KEY          [2]//
-//[x]||||||||||||||||||||||||||||||||[x]//
-//may not need
-// function init() {
-//   gapi.client.setApiKey('AIzaSyBRtVVHPmgkcUe36EUdHN-yWetm7-IjIO0');
-//   gapi.client.load('youtube', 'v3', function(){
-//     console.log('loaded');
-//   });
-// };
