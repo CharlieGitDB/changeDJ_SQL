@@ -106,7 +106,6 @@ function mainPageLogic(){
   });
 
   socket.on('get userlist', function(userList){
-    console.log(userList);
     $('.userListList').empty();
     for(var i = 0; i < userList.length; i++){
       $('.userListList').append('<li>' + userList[i] + '</li>');
@@ -333,10 +332,7 @@ function mainPageLogic(){
   //[x]||||||||||||||||||||||||||||||||[x]//
   //[2]SHOW CURRENT DJ                 [2]//
   //[x]||||||||||||||||||||||||||||||||[x]//
-
-  //Will need to make this work with updateQueue
   socket.on('current dj', function(username){
-    console.log(username);
     if(userInfo.username == username){
       iAmDJ = true;
     }else{
