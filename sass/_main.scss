@@ -84,6 +84,10 @@
 .chatInput {
   width: 99%;
 }
+.chatImg {
+  max-height: 75px;
+  max-width: 140px;
+}
 .mainOptionsBtn {
   width: 49%;
   float: left;
@@ -183,12 +187,4 @@
 }
 .centerSearchIMG {
   margin: 4px 4px -2px 70px;
-}
-.logOutText {
-  font-size: 24px;
-  text-align: center;
-  color: black;
-}
-.imgHolder {
-  text-align: center;
 }

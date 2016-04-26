@@ -204,53 +204,6 @@ io.on('connection', function(socket){
     if(catchFinish == null){
       catchFinish = setTimeout(changeSong, 7000);
     }
-
-    /*
-      The commented out code below may be useless, but will keep while I test the current functionality for bugs.
-    */
-
-    // var results = [];
-    //
-    // pg.connect(connection, function(err, client, done){
-    //   var findDJQueueLength = client.query('SELECT * FROM djqueue');
-    //
-    //   findDJQueueLength.on('row', function(row){
-    //     results.push(row);
-    //   });
-    //
-    //   findDJQueueLength.on('end', function(){
-    //     if(results.length <= 0){
-    //       return false;
-    //     }
-    //     var djFound = [];
-    //     var findDJ = client.query('SELECT * FROM djqueue WHERE username = $1', [username]);
-    //
-    //     findDJ.on('row', function(row){
-    //       djFound.push(row);
-    //     });
-    //     // if(catchFinish == null){
-    //     //   catchFinish = setTimeout(changeSong, 25000);
-    //     // }
-    //     findDJ.on('end', function(){
-    //       if(djFound.length >= 1){
-    //         djs++;
-    //         console.log('djs:', djs, 'results:', results.length);
-    //         console.log('hit dj found');
-    //       }else{
-    //         client.end();
-    //       }
-    //
-    //       if(djs == results.length){
-    //         console.log('hit djs and results |||');
-    //         changeSong();
-    //         if(catchFinish != null){
-    //           // clearTimeout(catchFinish);
-    //           catchFinish = null;
-    //         }
-    //       };
-    //     });
-    //   });
-    // });
   });
 
   //[x]||||||||||||||||||||||||||||||||[x]//

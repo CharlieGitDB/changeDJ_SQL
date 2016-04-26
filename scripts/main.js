@@ -5,6 +5,7 @@ var mainPageCounter = 0;
 var socket;
 var userInfo;
 var userPlaylist;
+var iAmDJ = false;
 
 //[x]||||||||||||||||||||||||||||||||||||||||||[x]//
 //[1]MAIN PAGE LOGIC                           [1]//
@@ -101,6 +102,12 @@ function mainPageLogic(){
   //[x]||||||||||||||||||||||||||||||||[x]//
   //[2]CHAT LOGIC                      [2]//
   //[x]||||||||||||||||||||||||||||||||[x]//
+  function endWithF(url){
+    if(url.substring(url.length-1) != 'f'){
+      return false;
+    }
+  }
+
   $('.chatInput').on('keyup', function(e){
     e.preventDefault();
     if(e.which == 13){
@@ -108,10 +115,23 @@ function mainPageLogic(){
           alert('Message cannot be blank');
       }else if($(this).val().length > 200){
         alert('200 character limit');
-      } else {
-        var userNameAndMsg = {userId: userInfo.username, msg: $(this).val()};
-        socket.emit('user chat message', userNameAndMsg);
-        $(this).val('');
+      }else{
+        if($(this).val().startsWith('img:')){
+          var img = $(this).val().replace('img:', '');
+          if(img.endsWith('.gif')){
+            var msgVal = '<img src="'+ img + '" class="chatImg"/>';
+            var userNameAndMsg = {userId: userInfo.username, msg: msgVal};
+            socket.emit('user chat message', userNameAndMsg);
+            $(this).val('');
+          }else{
+            alert('Invalid .gif url');
+          }
+        }else{
+          var msgVal = $(this).val().replace(/[^a-z0-9]/gi,' ');
+          var userNameAndMsg = {userId: userInfo.username, msg: msgVal};
+          socket.emit('user chat message', userNameAndMsg);
+          $(this).val('');
+        }
       }
     }
   });
@@ -154,7 +174,6 @@ function mainPageLogic(){
     };
   }
 
-  //Will want this fully websockets soon
   socket.on('dj queue', function(){
     $.ajax({
       method: 'GET',
@@ -171,7 +190,6 @@ function mainPageLogic(){
   var imgUrlArray = [];
   function searchVideo(query){
     var q = encodeURIComponent(query).replace(/%20/g, "+");
-    //changed url order=relevance from viewCount, may change back
     $.ajax({
       method: 'GET',
       url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&order=relevance&type=video&q='+ q + '&videoSyndicated=true&videoEmbeddable=true&key=AIzaSyBRtVVHPmgkcUe36EUdHN-yWetm7-IjIO0'
@@ -267,6 +285,11 @@ function mainPageLogic(){
   //Will need to make this work with updateQueue
   socket.on('current dj', function(username){
     console.log(username);
+    if(userInfo.username == username){
+      iAmDJ = true;
+    }else{
+      iAmDJ = false;
+    }
     $('.djQueue ul li').css('background', '#34509D');
     $('.djQueue ul li').filter(function(){
       return $(this).text() === username;
