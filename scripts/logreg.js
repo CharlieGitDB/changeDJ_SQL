@@ -14,7 +14,7 @@ $(function(){
 //[2]INIT FUNCTION                   [2]//
 //[x]||||||||||||||||||||||||||||||||[x]//
 function start(){
-  setLoginRegisterView()
+  setLoginRegisterView();
   loginRun();
   registerRun();
   swapRegisterLogic();
@@ -24,6 +24,27 @@ function start(){
 //[x]||||||||||||||||||||||||||||||||||||||||||[x]//
 //[1]FUNCTIONS                                 [1]//
 //[x]||||||||||||||||||||||||||||||||||||||||||[x]//
+
+//[x]||||||||||||||||||||||||||||||||[x]//
+//[2]IS USER AUTHENTICATED           [2]//
+//[x]||||||||||||||||||||||||||||||||[x]//
+function isUserAuthenticated(){
+  $.ajax({
+    method: 'GET',
+    url: '/isuserloggedin'
+  }).done(function(response){
+    if(response == 'no'){
+      setLoginRegisterView();
+    }else{
+      $('body').html(response).promise().done(function(){
+        if(mainPageCounter == 0){
+            mainPageLogic();
+            mainPageCounter++;
+        }
+      });
+    }
+  });
+};
 
 //[x]||||||||||||||||||||||||||||||||[x]//
 //[2]LOGIN/REGISTER FUNCTION         [2]//
@@ -40,8 +61,6 @@ function loginRun(){
       if(response == 'fail'){
         $('.loginError').show().delay(5000).fadeOut();
       }else{
-        //may need to fix
-
         $('body').html(response).promise().done(function(){
           if(mainPageCounter == 0){
             mainPageLogic();

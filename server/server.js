@@ -16,8 +16,7 @@ app.use(session({
    secret: 'secret',
    key: 'user',
    resave: true,
-   saveUninitialized: false,
-   cookie: { maxAge: 60000, secure: false }
+   saveUninitialized: false
 }));
 
 app.use(bodyParser.json());
@@ -36,8 +35,8 @@ app.use('/', index);
 //[2]WEBSOCKET GLOBAL VARS           [2]//
 //[x]||||||||||||||||||||||||||||||||[x]//
 var usersConnected = 0;
-var djs = 0;
 var catchFinish = null;
+var userList = [];
 
 //[x]||||||||||||||||||||||||||||||||[x]//
 //[2]SOCKET CONNECTION               [2]//
@@ -49,6 +48,24 @@ io.on('connection', function(socket){
   socket.on('disconnect', function(){
     usersConnected--;
     console.log('users connected >>', usersConnected);
+  });
+
+  //[x]||||||||||||||||||||||||||||||||[x]//
+  //[2]USER LIST                       [2]//
+  //[x]||||||||||||||||||||||||||||||||[x]//
+  socket.on('join userlist', function(username){
+    userList.push(username);
+  });
+
+  socket.on('get userlist', function(){
+    socket.emit('get userlist', userList);
+  });
+
+  socket.on('leave userlist', function(username){
+    var index = userList.indexOf(username);
+    if(index > -1){
+      userList.splice(index, 1);
+    }
   });
 
   //[x]||||||||||||||||||||||||||||||||[x]//
@@ -141,9 +158,6 @@ io.on('connection', function(socket){
               console.log('error', err);
             }else{
               console.log('deleted');
-              if(djs > 0){
-                djs--;
-              }
               client.end();
             }
           });
@@ -181,7 +195,6 @@ io.on('connection', function(socket){
 
             grabNewDJ.on('end', function(){
               sendSong(newDJ[0].username);
-              djs = 0;
               io.emit('current dj', newDJ[0].username);
               catchFinish = null;
               client.end();

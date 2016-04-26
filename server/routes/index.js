@@ -21,6 +21,7 @@ router.get('/fail', function(request, response){
 });
 
 router.post('/login', passport.authenticate('local', {failureRedirect: '/fail'}), function(request, response){
+  request.session.cookie.expires = false;
   response.redirect('/success');
 });
 

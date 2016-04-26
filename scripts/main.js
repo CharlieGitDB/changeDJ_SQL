@@ -43,6 +43,7 @@ function mainPageLogic(){
   window.onbeforeunload = function(){
     socket.emit('leave dj', userInfo.username);
     socket.emit('dj queue');
+    socket.emit('leave userlist', userInfo.username);
   }
 
   //[x]||||||||||||||||||||||||||||||||[x]//
@@ -60,14 +61,15 @@ function mainPageLogic(){
       data: sendMe
     }).done(function(response){
       updatePlaylist(response);
-    });
-  });
 
-  $.ajax({
-    method: 'GET',
-    url: '/djqueue'
-  }).done(function(response){
-    updateQueue(response);
+      $.ajax({
+        method: 'GET',
+        url: '/djqueue'
+      }).done(function(response){
+        updateQueue(response);
+        socket.emit('join userlist', userInfo.username);
+      });
+    });
   });
 
   //[x]||||||||||||||||||||||||||||||||[x]//
@@ -85,6 +87,35 @@ function mainPageLogic(){
     if($('.dropdownList').is(':visible')){
       $('.dropdownList').hide();
     }
+  });
+
+  $('body').on('click', '.chatCodes', function(){
+    alert('This currently does nothing');
+  });
+
+  //[x]||||||||||||||||||||||||||||||||[x]//
+  //[2]SET DRAGGABLES                  [2]//
+  //[x]||||||||||||||||||||||||||||||||[x]//
+  $('.userListContainer').draggable({ handle: '.userListHeader', containment: 'document' });
+
+  //[x]||||||||||||||||||||||||||||||||[x]//
+  //[2]USER LIST                       [2]//
+  //[x]||||||||||||||||||||||||||||||||[x]//
+  $('body').on('click', '.userList', function(){
+    socket.emit('get userlist');
+  });
+
+  socket.on('get userlist', function(userList){
+    console.log(userList);
+    $('.userListList').empty();
+    for(var i = 0; i < userList.length; i++){
+      $('.userListList').append('<li>' + userList[i] + '</li>');
+    }
+    $('.userListContainer').show();
+  });
+
+  $('body').on('click', '.exitBtn', function(){
+    $(this).parent().parent().hide();
   });
 
   //[x]||||||||||||||||||||||||||||||||[x]//
