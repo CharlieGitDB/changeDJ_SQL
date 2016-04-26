@@ -73,8 +73,18 @@ function mainPageLogic(){
   //[x]||||||||||||||||||||||||||||||||[x]//
   //[2]HEADER MENU LOGIC               [2]//
   //[x]||||||||||||||||||||||||||||||||[x]//
-  $('body').on('click', '.hamburgerIcon', function(){
-    alert('This currently doesn\'t do anything');
+  $('body').on('click', '.dropdown', function(){
+    if(!$('.dropdownList').is(':visible')){
+      $('.dropdownList').css('display', 'block');
+    }else{
+      $('.dropdownList').hide();
+    }
+  });
+
+  $('body').on('click', '.mainContainer', function(){
+    if($('.dropdownList').is(':visible')){
+      $('.dropdownList').hide();
+    }
   });
 
   //[x]||||||||||||||||||||||||||||||||[x]//
@@ -113,7 +123,6 @@ function mainPageLogic(){
       document.title = 'ChangeDJ';
     }
   }
-
   document.addEventListener('visibilitychange', focusChange, false);
 
   $('.chatInput').on('keyup', function(e){
