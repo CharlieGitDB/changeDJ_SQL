@@ -12,14 +12,6 @@ router.get('/', function(request,response){
   response.sendFile(path.join(__dirname, '/../public/views/index.html'));
 });
 
-router.get('/isuserloggedin', function(request, response){
-    if(request.isAuthenticated() == true){
-      response.redirect('/success');
-    } else {
-      response.send('no');
-    }
-});
-
 router.get('/success', function(request, response){
   response.sendFile(path.join(__dirname, '/../public/views/main.html'));
 });
@@ -29,17 +21,7 @@ router.get('/fail', function(request, response){
 });
 
 router.post('/login', passport.authenticate('local', {failureRedirect: '/fail'}), function(request, response){
-  if(request.body.remember == true){
-    request.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
-  }else{
-    request.session.cookie.expires = false;
-  }
   response.redirect('/success');
-});
-
-router.get('/logout', function(request,response){
-  request.logout();
-  response.send('logged out');
 });
 
 router.post('/register', function(req, res, next) {

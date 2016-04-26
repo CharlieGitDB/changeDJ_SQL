@@ -202,7 +202,7 @@ io.on('connection', function(socket){
 
   socket.on('song finished', function(username){
     if(catchFinish == null){
-      catchFinish = setTimeout(changeSong, 10000);
+      catchFinish = setTimeout(changeSong, 7000);
     }
 
     /*

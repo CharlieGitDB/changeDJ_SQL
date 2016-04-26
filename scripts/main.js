@@ -72,21 +72,6 @@ function mainPageLogic(){
   //[x]||||||||||||||||||||||||||||||||[x]//
   //[2]HEADER MENU LOGIC               [2]//
   //[x]||||||||||||||||||||||||||||||||[x]//
-
-  //this needs to be fixed
-  $('body').on('click', '.logout', function(){
-    $.ajax({
-      method: 'GET',
-      url: '/logout',
-    }).done(function(response){
-      if(response == 'logged out'){
-        socket.emit('leave dj', userInfo.username);
-        socket.emit('dj queue');
-        location.reload();
-      }
-    });
-  });
-
   $('body').on('click', '.hamburgerIcon', function(){
     alert('This currently doesn\'t do anything');
   });
@@ -245,7 +230,9 @@ function mainPageLogic(){
       socket.emit('leave dj', userInfo.username);
       socket.emit('dj queue');
     }else{
-      $('.joinDJ').show();
+      if(!$('.joinDJ').is(':visible') && !$('.leaveDJ').is(':visible')){
+        $('.joinDJ').show();
+      }
       userPlaylist = response;
       $('.playlistContent').append('<ul class="playlistContentList"></ul>');
       var songIdData = 0;

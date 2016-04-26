@@ -14,7 +14,7 @@ $(function(){
 //[2]INIT FUNCTION                   [2]//
 //[x]||||||||||||||||||||||||||||||||[x]//
 function start(){
-  isUserAuthenticated();
+  setLoginRegisterView()
   loginRun();
   registerRun();
   swapRegisterLogic();
@@ -93,26 +93,6 @@ function registerRun(){
     };
   });
 }
-
-//[x]||||||||||||||||||||||||||||||||[x]//
-//[2]CHECK IF USER IS LOGGED IN      [2]//
-//[x]||||||||||||||||||||||||||||||||[x]//
-function isUserAuthenticated(){
-  $.ajax({
-    method: 'GET',
-    url: '/isuserloggedin'
-  }).done(function(response){
-    if(response == 'no'){
-      setLoginRegisterView();
-    }else{
-      $('body').html(response);
-      if(mainPageCounter == 0){
-          mainPageLogic();
-          mainPageCounter++;
-      }
-    }
-  });
-};
 
 //[x]||||||||||||||||||||||||||||||||[x]//
 //[2]SET LOGIN REGISTER VIEW         [2]//
