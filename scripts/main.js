@@ -102,12 +102,6 @@ function mainPageLogic(){
   //[x]||||||||||||||||||||||||||||||||[x]//
   //[2]CHAT LOGIC                      [2]//
   //[x]||||||||||||||||||||||||||||||||[x]//
-  function endWithF(url){
-    if(url.substring(url.length-1) != 'f'){
-      return false;
-    }
-  }
-
   $('.chatInput').on('keyup', function(e){
     e.preventDefault();
     if(e.which == 13){
