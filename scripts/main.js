@@ -102,6 +102,20 @@ function mainPageLogic(){
   //[x]||||||||||||||||||||||||||||||||[x]//
   //[2]CHAT LOGIC                      [2]//
   //[x]||||||||||||||||||||||||||||||||[x]//
+  var missedMsgCount = 0;
+  var isFocused;
+  function focusChange(){
+    if(document.hidden){
+      isFocused = false;
+    }else{
+      isFocused = true;
+      missedMsgCount = 0;
+      document.title = 'ChangeDJ';
+    }
+  }
+
+  document.addEventListener('visibilitychange', focusChange, false);
+
   $('.chatInput').on('keyup', function(e){
     e.preventDefault();
     if(e.which == 13){
@@ -133,6 +147,10 @@ function mainPageLogic(){
   socket.on('user chat message', function(idmsg){
     $('.chatMessages ul').append('<li><span style="color: '+idmsg.color+';">'+idmsg.userId+'</span>: '+idmsg.msg+'</li>');
     $('.chatMessages').scrollTop($('.chatMessages ul').height());
+    if(isFocused == false){
+      missedMsgCount++;
+      document.title = '('+missedMsgCount+') ChangeDJ';
+    }
   });
 
   //[x]||||||||||||||||||||||||||||||||[x]//

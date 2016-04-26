@@ -31,7 +31,7 @@ function start(){
 function loginRun(){
   $('#loginForm').submit(function(e){
     e.preventDefault();
-    var user = {remember: $('loginRemember').is(':checked'), username: $('.loginUser').val(), password: $('.loginPass').val()};
+    var user = {username: $('.loginUser').val(), password: $('.loginPass').val()};
     $.ajax({
       method: 'POST',
       url: '/login',
@@ -82,12 +82,13 @@ function registerRun(){
         if(response == 'registered'){
           writeError('Username is taken.');
         }else{
-          $('body').html(response);
-          localStorage.setItem('hasUserBeenHere', true);
-          if(mainPageCounter == 0){
-            mainPageLogic();
-            mainPageCounter++;
-          }
+          $('body').html(response).promise().done(function(){
+            localStorage.setItem('hasUserBeenHere', true);
+            if(mainPageCounter == 0){
+              mainPageLogic();
+              mainPageCounter++;
+            }
+          });
         }
       });
     };

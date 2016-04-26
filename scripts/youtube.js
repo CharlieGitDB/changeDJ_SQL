@@ -40,7 +40,6 @@ function onPlayerStateChange(event){
     $('.videoTitle').text(vidTitle);
     $('.playlistContentList li').css('background', '#34509D');
     if(iAmDJ == true){
-      // $('.playlistSongName:contains('+vidTitle+')').parent().css('background', '#56C247');
       $('.playlistSongName').filter(function(){
         return $(this).text() === vidTitle;
       }).parent().css('background', '#56C247');
