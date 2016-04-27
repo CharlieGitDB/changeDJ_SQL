@@ -44,6 +44,10 @@ function mainPageLogic(){
     socket.emit('leave dj', userInfo.username);
     socket.emit('dj queue');
     socket.emit('leave userlist', userInfo.username);
+    $.ajax({
+      method: 'GET',
+      url: '/logout'
+    });
   }
 
   //[x]||||||||||||||||||||||||||||||||[x]//
@@ -306,12 +310,12 @@ function mainPageLogic(){
       $('.playlistContent').append('<ul class="playlistContentList"></ul>');
       var songIdData = 0;
       for(var i = 0; i < userPlaylist.length; i++){
-        $('.playlistContentList').append('<li class="playlistContentListItem searchedVideoDiv"><div class="moveSongToFirst option" id="moveSongToFirst'+songIdData+'">&#8593;</div><button class="removeSongBtn redBtn" id="removeSongBtn'+songIdData+'">-</button><img src="'+userPlaylist[i].imgurl+'" class="playlistIMG"/><br><span class="playlistSongName">'+userPlaylist[i].songname+'</span></li>');
+        $('.playlistContentList').append('<li class="playlistContentListItem searchedVideoDiv"><div class="moveSongToLast option" id="moveSongToLast'+songIdData+'">&darr;</div><button class="removeSongBtn redBtn" id="removeSongBtn'+songIdData+'">-</button><img src="'+userPlaylist[i].imgurl+'" class="playlistIMG"/><br><span class="playlistSongName">'+userPlaylist[i].songname+'</span></li>');
         $('#removeSongBtn'+songIdData).data('songid', userPlaylist[i].songid);
-        $('#moveSongToFirst'+songIdData).data('song', userPlaylist[i]);
+        $('#moveSongToLast'+songIdData).data('song', userPlaylist[i]);
         songIdData++;
       }
-      $('.moveSongToFirst').hide();
+      $('.moveSongToLast').hide();
     };
   }
 

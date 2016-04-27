@@ -25,6 +25,12 @@ router.post('/login', passport.authenticate('local', {failureRedirect: '/fail'})
   response.redirect('/success');
 });
 
+router.get('/logout', function(request, response){
+  request.logOut();
+  request.session.destroy();
+  console.log('hit log out');
+});
+
 router.post('/register', function(req, res, next) {
   var saveUser = {
     username: req.body.username,

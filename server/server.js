@@ -78,9 +78,6 @@ io.on('connection', function(socket){
   //[x]||||||||||||||||||||||||||||||||[x]//
   //[2]PLAY SONG                       [2]//
   //[x]||||||||||||||||||||||||||||||||[x]//
-  /*
-    May need to update all SQL now() functions.  Currently isn't showing date but may not be a problem.
-  */
   function sendSong(username){
     var result = [];
     pg.connect(connection, function(err, client, done){
@@ -165,7 +162,6 @@ io.on('connection', function(socket){
           //may need to create a possible fall back
         }
       });
-
     });
   });
 
@@ -222,7 +218,7 @@ io.on('connection', function(socket){
   //[x]||||||||||||||||||||||||||||||||[x]//
   //[2]CHAT LOGIC                      [2]//
   //[x]||||||||||||||||||||||||||||||||[x]//
-
+  
   var alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
   function colorPicker(id){
     if(isNaN(id.userId.slice(-1)) == false){

@@ -52,6 +52,7 @@ function isUserAuthenticated(){
 function loginRun(){
   $('#loginForm').submit(function(e){
     e.preventDefault();
+    $('.login').prop('disabled', true);
     var user = {username: $('.loginUser').val(), password: $('.loginPass').val()};
     $.ajax({
       method: 'POST',
@@ -59,6 +60,7 @@ function loginRun(){
       data: user
     }).done(function(response){
       if(response == 'fail'){
+        $('.login').prop('disabled', false);
         $('.loginError').show().delay(5000).fadeOut();
       }else{
         $('body').html(response).promise().done(function(){
