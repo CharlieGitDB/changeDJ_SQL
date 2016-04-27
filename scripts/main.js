@@ -50,6 +50,7 @@ function mainPageLogic(){
     });
   }
 
+  console.log('hit main page logic');
   //[x]||||||||||||||||||||||||||||||||[x]//
   //[2]GRAB USERS INFORMATION          [2]//
   //[x]||||||||||||||||||||||||||||||||[x]//
@@ -58,6 +59,7 @@ function mainPageLogic(){
     url: '/userinfo'
   }).done(function(response){
     userInfo = response;
+    console.log(userInfo);
     var sendMe = {username: userInfo.username};
     $.ajax({
       method: 'POST',
@@ -163,7 +165,7 @@ function mainPageLogic(){
     e.preventDefault();
     if(e.which == 13){
       if ($(this).val().match(/^\s*$/)) {
-          alert('Message cannot be blank');
+        alert('Message cannot be blank');
       }else if($(this).val().length > 200){
         alert('200 character limit');
       }else{

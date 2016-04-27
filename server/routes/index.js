@@ -47,7 +47,7 @@ router.post('/register', function(req, res, next) {
             next(err);
             res.send('registered');
           } else {
-          res.redirect('/success');
+            res.send('success');
           }
         });
   });

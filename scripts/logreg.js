@@ -73,7 +73,6 @@ function registerRun(){
     }
     if($('.registerUser').val().length >= 3 && $('.registerPass').val().length >= 5 && $('.registerPass2').val().length >= 5 &&  $('.registerPass').val() == $('.registerPass2').val()){
       var user = {username: $('.registerUser').val(), password: $('.registerPass').val()};
-      console.log(user);
       $.ajax({
         method: 'POST',
         url: '/register',
@@ -82,13 +81,14 @@ function registerRun(){
         if(response == 'registered'){
           writeError('Username is taken.');
         }else{
-          $('body').html(response).promise().done(function(){
-            localStorage.setItem('hasUserBeenHere', true);
-            if(mainPageCounter == 0){
-              mainPageLogic();
-              mainPageCounter++;
-            }
-          });
+          localStorage.setItem('hasUserBeenHere', true);
+          $('.registerContainer').hide();
+          $('.suggestSwapSpan').text('If you don\'t have an account one you may register.');
+          $('.suggestSwapBtn').text('Register');
+          $('.loginContainer, .suggestSwapBox').show();
+          $('.loginUser').focus();
+          $('#loginForm').append('<p class="regSuccess">You have sucessfully registered.</p>');
+          $('.regSuccess').delay(5000).fadeOut();
         }
       });
     };
