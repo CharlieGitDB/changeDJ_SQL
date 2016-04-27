@@ -208,6 +208,7 @@ function mainPageLogic(){
 
   $('body').on('click', '.leaveDJ', function(){
     socket.emit('leave dj', userInfo.username);
+    $('.playlistContentListItem').css('background', '#34509D');
     $('.leaveDJ').hide();
     $('.joinDJ').show();
     socket.emit('dj queue');
@@ -311,7 +312,7 @@ function mainPageLogic(){
       $('.playlistContent').append('<ul class="playlistContentList"></ul>');
       var songIdData = 0;
       for(var i = 0; i < userPlaylist.length; i++){
-        $('.playlistContentList').append('<li class="playlistContentListItem searchedVideoDiv"><div class="moveSongToLast option" id="moveSongToLast'+songIdData+'">&darr;</div><button class="removeSongBtn redBtn" id="removeSongBtn'+songIdData+'">-</button><img src="'+userPlaylist[i].imgurl+'" class="playlistIMG"/><br><span class="playlistSongName">'+userPlaylist[i].songname+'</span></li>');
+        $('.playlistContentList').append('<li class="playlistContentListItem searchedVideoDiv"><div class="moveSongToLast option btn" id="moveSongToLast'+songIdData+'">&darr;</div><button class="removeSongBtn redBtn" id="removeSongBtn'+songIdData+'">-</button><img src="'+userPlaylist[i].imgurl+'" class="playlistIMG"/><br><span class="playlistSongName">'+userPlaylist[i].songname+'</span></li>');
         $('#removeSongBtn'+songIdData).data('songid', userPlaylist[i].songid);
         $('#moveSongToLast'+songIdData).data('song', userPlaylist[i]);
         songIdData++;
@@ -319,6 +320,31 @@ function mainPageLogic(){
       $('.moveSongToLast').hide();
     };
   }
+
+  //[x]||||||||||||||||||||||||||||||||[x]//
+  //[2]MOVE SONG TO LAST               [2]//
+  //[x]||||||||||||||||||||||||||||||||[x]//
+  $('body').on('click', '.moveSongToLast', function(){
+    var songToMove = {username: userInfo.username, song: $(this).data('song')};
+    $.ajax({
+      method: 'POST',
+      url: '/movesongtolast',
+      data: songToMove
+    }).done(function(response){
+      updatePlaylist(response);
+    });
+  });
+
+  $('body').on('mouseenter', '.playlistContentListItem', function(){
+    if($(this).index() != $('.playlistContentListItem').length - 1){
+      $(this).children(':first-child').show();
+      $(this).children(':nth-child(3)').css({'margin-left': '5px'});
+    }
+  });
+  $('body').on('mouseleave', '.playlistContentListItem', function(){
+    $('.moveSongToLast').hide();
+    $('.playlistIMG').css({'margin-left': '70px'});
+  });
 
   //[x]||||||||||||||||||||||||||||||||[x]//
   //[2]DELETE SONG FROM PLAYLIST       [2]//

@@ -405,6 +405,10 @@ input {
   float: right;
   margin: 8px; }
 
+.option {
+  float: left;
+  margin: 8px; }
+
 .songSearches {
   overflow-y: scroll; }
 

@@ -22,6 +22,7 @@ router.get('/fail', function(request, response){
 
 router.post('/login', passport.authenticate('local', {failureRedirect: '/fail'}), function(request, response){
   request.session.cookie.expires = false;
+  request.session.cookie.maxAge = false;
   response.redirect('/success');
 });
 
@@ -91,7 +92,7 @@ router.post('/addsongtoplaylist', function(request, response){
       }else{
         console.log('song added');
         var results = [];
-        var sendPlaylist = client.query('SELECT * FROM songs WHERE username = $1', [username]);
+        var sendPlaylist = client.query('SELECT * FROM songs WHERE username = $1 ORDER BY time', [username]);
         sendPlaylist.on('row', function(row){
           results.push(row);
         });
@@ -108,7 +109,7 @@ router.post('/getuserplaylist', function(request, response){
   var username = request.body.username;
   pg.connect(connection, function(err, client, done){
     var results = [];
-    var sendPlaylist = client.query('SELECT * FROM songs WHERE username = $1', [username]);
+    var sendPlaylist = client.query('SELECT * FROM songs WHERE username = $1 ORDER BY time', [username]);
     sendPlaylist.on('row', function(row){
       results.push(row);
     });
@@ -122,6 +123,31 @@ router.post('/getuserplaylist', function(request, response){
   });
 });
 
+router.post('/movesongtolast', function(request, response){
+  var username = request.body.username;
+  var songid = request.body.song.songid;
+  pg.connect(connection, function(err, client, done){
+    var moveToLast = client.query('UPDATE songs SET time = now() WHERE songid = $1 AND username = $2', [songid, username]);
+
+    moveToLast.on('end', function(){
+      var results = [];
+      var sendPlaylist = client.query('SELECT * FROM songs WHERE username = $1 ORDER BY time', [username]);
+      sendPlaylist.on('row', function(row){
+        results.push(row);
+      });
+      sendPlaylist.on('end', function(){
+        client.end();
+        response.send(results);
+      });
+    });
+
+    if(err){
+      console.log('err moving song to last');
+      client.end();
+    }
+  });
+});
+
 router.post('/removesong', function(request, response){
   var username = request.body.username;
   var songid = request.body.songid;
@@ -132,7 +158,7 @@ router.post('/removesong', function(request, response){
       }else{
         console.log('song removed');
         var results = [];
-        var sendPlaylist = client.query('SELECT * FROM songs WHERE username = $1', [username]);
+        var sendPlaylist = client.query('SELECT * FROM songs WHERE username = $1 ORDER BY time', [username]);
         sendPlaylist.on('row', function(row){
           results.push(row);
         });
