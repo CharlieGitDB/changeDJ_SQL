@@ -26,27 +26,6 @@ function start(){
 //[x]||||||||||||||||||||||||||||||||||||||||||[x]//
 
 //[x]||||||||||||||||||||||||||||||||[x]//
-//[2]IS USER AUTHENTICATED           [2]//
-//[x]||||||||||||||||||||||||||||||||[x]//
-function isUserAuthenticated(){
-  $.ajax({
-    method: 'GET',
-    url: '/isuserloggedin'
-  }).done(function(response){
-    if(response == 'no'){
-      setLoginRegisterView();
-    }else{
-      $('body').html(response).promise().done(function(){
-        if(mainPageCounter == 0){
-            mainPageLogic();
-            mainPageCounter++;
-        }
-      });
-    }
-  });
-};
-
-//[x]||||||||||||||||||||||||||||||||[x]//
 //[2]LOGIN/REGISTER FUNCTION         [2]//
 //[x]||||||||||||||||||||||||||||||||[x]//
 function loginRun(){
