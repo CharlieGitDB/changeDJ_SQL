@@ -50,7 +50,6 @@ function mainPageLogic(){
     });
   }
 
-  console.log('hit main page logic');
   //[x]||||||||||||||||||||||||||||||||[x]//
   //[2]GRAB USERS INFORMATION          [2]//
   //[x]||||||||||||||||||||||||||||||||[x]//
