@@ -58,7 +58,6 @@ function mainPageLogic(){
     url: '/userinfo'
   }).done(function(response){
     userInfo = response;
-    console.log(userInfo);
     var sendMe = {username: userInfo.username};
     $.ajax({
       method: 'POST',
