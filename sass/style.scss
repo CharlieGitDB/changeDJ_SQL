@@ -27,20 +27,6 @@ $logoFont: 'Ubuntu Mono', sans-serif;
     clear: both;
   }
 }
-
-.redBtn {
-  background: rgba(248,80,50,1);
-  background: -moz-linear-gradient(top, rgba(248,80,50,1) 0%, rgba(255,21,0,1) 100%);
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(248,80,50,1)), color-stop(100%, rgba(255,21,0,1)));
-  background: -webkit-linear-gradient(top, rgba(248,80,50,1) 0%, rgba(255,21,0,1) 100%);
-  background: -o-linear-gradient(top, rgba(248,80,50,1) 0%, rgba(255,21,0,1) 100%);
-  background: -ms-linear-gradient(top, rgba(248,80,50,1) 0%, rgba(255,21,0,1) 100%);
-  background: linear-gradient(to bottom, rgba(248,80,50,1) 0%, rgba(255,21,0,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f85032', endColorstr='#ff1500', GradientType=0 );
-  &:active {
-    background: rgba(248,80,50,1);
-  }
-}
 body {
   margin: 0px;
   padding: 0px;
@@ -86,6 +72,19 @@ input {
   &:focus {
     border: solid 1px #707070;
     box-shadow: 0 0 5px 1px #969696;
+  }
+}
+.redBtn {
+  background: rgba(248,80,50,1);
+  background: -moz-linear-gradient(top, rgba(248,80,50,1) 0%, rgba(255,21,0,1) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(248,80,50,1)), color-stop(100%, rgba(255,21,0,1)));
+  background: -webkit-linear-gradient(top, rgba(248,80,50,1) 0%, rgba(255,21,0,1) 100%);
+  background: -o-linear-gradient(top, rgba(248,80,50,1) 0%, rgba(255,21,0,1) 100%);
+  background: -ms-linear-gradient(top, rgba(248,80,50,1) 0%, rgba(255,21,0,1) 100%);
+  background: linear-gradient(to bottom, rgba(248,80,50,1) 0%, rgba(255,21,0,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f85032', endColorstr='#ff1500', GradientType=0 );
+  &:active {
+    background: rgba(248,80,50,1);
   }
 }
 .btn {
