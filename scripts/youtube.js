@@ -24,10 +24,6 @@ function onPlayerError(event){
   console.log(event);
 }
 
-function onPlayerReady(event){
-
-}
-
 function onPlayerStateChange(event){
   if(event.data === 0){
     console.log('video done');
